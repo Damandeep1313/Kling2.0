@@ -15,6 +15,12 @@ class VideoRequest(BaseModel):
     frame_rate: Optional[int] = 24
     style: Optional[str] = "cinematic"
 
+
+@app.head("/")
+def read_root_head():
+    return {"message": "Hello, World!"}
+
+
 @app.get("/")
 def read_root():
     return {"message": "Hello, World!"}
