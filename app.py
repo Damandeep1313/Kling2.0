@@ -5,6 +5,12 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
+
+@app.route('/')
+def home():
+    return "Hello, World!"
+
+
 def encode_jwt_token(ak, sk):
     headers = {
         "alg": "HS256",
