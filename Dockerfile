@@ -1,21 +1,18 @@
-# Use an official Python runtime as the base image
+# Use a Python base image
 FROM python:3.9-slim
 
-# Set the working directory in the container
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
-
-# Install any needed dependencies
+# Copy requirements.txt and install dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy all project files
+COPY . .
+
 # Expose the port the app will run on
-EXPOSE 5000
+EXPOSE 8000
 
-# Define the environment variable for Flask
-ENV FLASK_APP=app.py
-ENV FLASK_RUN_HOST=0.0.0.0
-
-# Run the Flask app
-CMD ["flask", "run"]
+# Set the command to run the FastAPI app using uvicorn
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
