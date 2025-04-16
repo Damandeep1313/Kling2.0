@@ -3,11 +3,12 @@ import jwt
 import requests
 from flask import Flask, request, jsonify
 
+app = Flask(__name__)
 @app.route('/')
 def home():
     return "Hello, World!"
 
-app = Flask(__name__)
+
 
 def encode_jwt_token(ak, sk):
     headers = {
